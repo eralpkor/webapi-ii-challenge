@@ -47,12 +47,17 @@ router.post('/', (req, res) => {
       db.findById(id)
         .then(([post]) => {
           res.status(201).json(post);
-        });
+        })
+        .catch(err => {
+          console.log(err)
+          res.status(500).json({ error: 'Error getting post.', id: id})
+        })
     })
     .catch(err => {
-      console.log(err)
-    })
-})
+      console.log(err);
+      res.status(500).json({ error: "There was an error while saving the post to the database" });
+    });
+});
 
 // export router
 module.exports = router;
