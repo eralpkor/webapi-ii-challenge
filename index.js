@@ -1,13 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const server = express();
 const blogRouter = require('./router/router.js');
-var cors = require('cors');
-
+// var cors = require('cors');
+const port = process.env.PORT || 4000;
 
 server.use(express.json());
 // server to use endpoints from router
 server.use('/api/posts', blogRouter);
-server.use(cors());
+// server.use(cors());
 
 
 // run server on '/'
@@ -18,6 +19,6 @@ server.get('/', (req, res) => {
   `)
 })
 
-server.listen(5000, () => {
-  console.log('\nServer started at port 5000\n')
+server.listen(port, () => {
+  console.log(`\nServer started at port ${port}\n`)
 })

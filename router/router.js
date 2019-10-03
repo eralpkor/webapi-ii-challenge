@@ -34,11 +34,13 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// Make blogs request to api/blogs
+// Make POST request to api/blogs
 router.post('/', (req, res) => {
   const { title, contents } = req.body;
+  console.log(req.body)
+  console.log(req.params)
   if (!title || !contents) {
-    return res.status(404).json({errorMessage: "Please provide title and contents for the post."});
+    return res.status(400).json({errorMessage: "Please provide title and contents for the post."});
   }
   db.insert({ title, contents })
     .then(({id}) => {
